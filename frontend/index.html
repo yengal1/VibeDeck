@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeDeck - Tu Ambiente Digital</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container">
+        <h1>VibeDeck 🎨🎶</h1>
+        <p>Ingresa tu estado de ánimo para personalizar tu ambiente de estudio o trabajo.</p>
+
+        <div class="input-section">
+            <input type="text" id="mood-input" placeholder="Ej: Calmado, Enérgico">
+            <button onclick="checkVibe()">Buscar Vibe</button>
+        </div>
+        
+        <div id="result-box" class="hidden">
+            <h2>Vibe encontrado: <span id="vibe-name"></span></h2>
+            <div id="color-display">
+                <p>Código HEX: <span id="vibe-desc"></span></p>
+            </div>
+        </div>
+        
+        <div id="music-player"></div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

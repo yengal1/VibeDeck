@@ -1,0 +1,29 @@
+version: '3.8'
+
+services:
+  # 1. SERVICIO DEL BACKEND (api) - Construye la API de FastAPI
+  api:
+    build:
+      context: ./backend       # Busca el Dockerfile en la carpeta ./backend
+    ports:
+      - "8000:8000"           # Expone el puerto 8000 en tu máquina local
+    volumes:
+      # CLAVE 1: Persistencia de la Base de Datos (SQLite)
+      # Crea un volumen llamado 'db_data' para guardar el archivo vibe_db.db 
+      # así los datos no se borran al detener el contenedor.
+      - db_data:/app/vibe_db.db 
+      # Desarrollo: Sincroniza el código fuente para facilitar cambios sin reconstruir
+      - ./backend/app:/app/app
+    
+  # 2. SERVICIO DEL FRONTEND (web) - Construye la interfaz Nginx/HTML
+  web:
+    build:
+      context: ./frontend      # Busca el Dockerfile en la carpeta ./frontend
+    ports:
+      - "80:80"               # Mapea el puerto 80 del contenedor al puerto 80 del host (acceso por http://localhost)
+    depends_on:
+      - api                   # Garantiza que el Backend se inicie ANTES que el Frontend
+    
+# Definición de Volúmenes para persistencia
+volumes:
+  db_data:
