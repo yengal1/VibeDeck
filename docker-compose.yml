@@ -20,7 +20,7 @@ services:
     build:
       context: ./frontend      # Busca el Dockerfile en la carpeta ./frontend
     ports:
-      - "80:80"               # Mapea el puerto 80 del contenedor al puerto 80 del host (acceso por http://localhost)
+      - "8080:80"               # Mapea el puerto 80 del contenedor al puerto 80 del host (acceso por http://localhost)
     depends_on:
       - api                   # Garantiza que el Backend se inicie ANTES que el Frontend
     
