@@ -44,7 +44,7 @@ Desarrollar una aplicación web contenida y versionada que aplique los principio
 
 ## 👩‍💻 Integrantes del equipo
 - **Yeni Galindo**  
-*(y los demás miembros del grupo, si aplica)*  
+  
 
 ---
 
