@@ -45,7 +45,7 @@ Desarrollar una aplicación web contenida y versionada que aplique los principio
 ## 👩‍💻 Integrantes del equipo
 - **Yeni Galindo**  
 - **Kewin Guzman Diaz** 
-- **YGerman David Navas Rodriguez** 
+- **German David Navas Rodriguez** 
 
 ---
 
