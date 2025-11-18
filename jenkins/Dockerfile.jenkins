@@ -1,0 +1,28 @@
+# =========================================
+# Dockerfile para Jenkins con Docker y plugins preinstalados
+# =========================================
+
+# Usamos la imagen oficial de Jenkins LTS como base
+FROM jenkins/jenkins:lts
+
+# Cambiamos a usuario root para poder instalar paquetes y plugins
+USER root
+
+# Actualizamos la lista de paquetes, instalamos Docker y limpiamos caché
+RUN apt-get update && \
+    apt-get install -y docker.io && \
+    apt-get clean
+
+# Instalamos plugins esenciales de Jenkins usando el CLI
+RUN jenkins-plugin-cli --plugins \
+    git \
+    github \ 
+    github-branch-source \
+    workflow-aggregator \
+    blueocean \
+    docker-workflow \
+    credentials \
+    credentials-binding
+
+# Volvemos a usuario jenkins para ejecutar el servidor de forma segura
+USER jenkins
