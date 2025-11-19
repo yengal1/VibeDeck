@@ -1,10 +1,14 @@
 pipeline {
-    agent any
+    agent any   // Ejecutar en cualquier agente disponible
 
     stages {
+
+        // 1. Pruebas del backend
         stage('Backend - Tests') {
             steps {
-                echo "Ejecutando pruebas backend..."
+                echo "Ejecutando pruebas del backend..."
+
+                // Construye una imagen temporal del backend y Ejecuta las pruebas dentro del contenedor
                 sh """
                     docker build -t vibedeck-backend-test -f backend/Dockerfile backend
                     docker run --rm vibedeck-backend-test pytest --maxfail=1 --disable-warnings -q || true
@@ -12,9 +16,12 @@ pipeline {
             }
         }
 
+        // 2. Revisión simple del frontend
         stage('Frontend - Check Files') {
             steps {
-                echo "Verificando archivos frontend..."
+                echo "Revisando archivos principales del frontend..."
+
+                //Verifica que los archivos existan
                 sh """
                     test -f frontend/index.html
                     test -f frontend/script.js
@@ -23,6 +30,7 @@ pipeline {
             }
         }
 
+        // 3. Construcción de imágenes Docker
         stage('Docker - Build Images') {
             steps {
                 echo "Construyendo imágenes Docker..."
@@ -30,9 +38,10 @@ pipeline {
             }
         }
 
+        // 4. Despliegue con Docker Compose
         stage('Docker - Deploy') {
             steps {
-                echo "Desplegando servicios..."
+                echo "Levantando los contenedores..."
                 sh "docker compose up -d"
             }
         }
@@ -40,10 +49,10 @@ pipeline {
 
     post {
         success {
-            echo "✔️ Pipeline completado correctamente"
+            echo "❌ Algo falló. Revisa los logs."
         }
         failure {
-            echo "❌ Pipeline falló. Revisa los logs."
+            echo "✔️ Todo se ejecutó correctamente."
         }
     }
 }
