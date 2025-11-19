@@ -34,11 +34,12 @@ La estructura modular del proyecto permitirá su **escalabilidad y mantenimiento
 ### 🔹 Infraestructura y control
 - **GitHub**: control de versiones y colaboración.  
 - **Docker Compose**: ejecución del backend y frontend en contenedores separados, permitiendo aislar entornos y garantizar portabilidad.
+- **Jenkins**:  automatización del flujo de integración continua, incluyendo validación del backend, verificación del frontend, construcción de imágenes Docker y despliegue automático del proyecto.
 
 ---
 
 ## 🚀 Objetivo general
-Desarrollar una aplicación web contenida y versionada que aplique los principios de **integración continua**, demostrando el uso coordinado de herramientas modernas de desarrollo como **GitHub**, **Docker** y **FastAPI**.
+Desarrollar una aplicación web contenida y versionada que aplique los principios de **integración continua** con **Jenkins**, demostrando el uso coordinado de herramientas modernas de desarrollo como **GitHub**, **Docker** y **FastAPI**.
 
 ---
 
@@ -50,13 +51,16 @@ Desarrollar una aplicación web contenida y versionada que aplique los principio
 ---
 
 ## 🏗️ Estado del proyecto
-🚧 *En desarrollo – Primera fase:*  
+🟢 *Finalizado – Primera fase:*  
 Creación del entorno base con control de versiones y contenerización de servicios (frontend y backend).
+
+🚧 *En desarrollo – Segunda fase:*  
+Se integró Jenkins al flujo del proyecto para automatizar las validaciones y despliegues
 
 ---
 
 ## 🧠 Institución
 **Politécnico Grancolombiano**  
-Módulo: *Integración Continua – Entrega 1*  
+Módulo: *Integración Continua – Entrega 1*  y *Integración Continua – Entrega 2*
 
 ---
