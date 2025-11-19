@@ -1,57 +1,49 @@
 pipeline {
     agent any
 
-    environment {
-        BACKEND_DIR = "backend"
-        FRONTEND_DIR = "frontend"
-    }
-
     stages {
-
         stage('Backend - Tests') {
             steps {
                 echo "Ejecutando pruebas backend..."
-
-                dir("${BACKEND_DIR}") {
-                    sh """
-                        pip install pytest || true
-                        pytest --maxfail=1 --disable-warnings -q || echo "No tests found, continuing..."
-                    """
-                }
+                sh """
+                    docker build -t vibedeck-backend-test -f backend/Dockerfile backend
+                    docker run --rm vibedeck-backend-test pytest --maxfail=1 --disable-warnings -q || true
+                """
             }
         }
 
-        stage('Frontend - Check files') {
+        stage('Frontend - Check Files') {
             steps {
                 echo "Verificando archivos frontend..."
-                sh "test -f ${FRONTEND_DIR}/index.html"
-                sh "test -f ${FRONTEND_DIR}/script.js"
-                sh "test -f ${FRONTEND_DIR}/style.css"
+                sh """
+                    test -f frontend/index.html
+                    test -f frontend/script.js
+                    test -f frontend/style.css
+                """
             }
         }
 
         stage('Docker - Build Images') {
             steps {
                 echo "Construyendo imágenes Docker..."
-                sh "docker-compose build --no-cache"
+                sh "docker compose build --no-cache"
             }
         }
 
         stage('Docker - Deploy') {
             steps {
-                echo "Levantando servicios..."
-                sh "docker-compose down"
-                sh "docker-compose up -d"
+                echo "Desplegando servicios..."
+                sh "docker compose up -d"
             }
         }
     }
 
     post {
         success {
-            echo '✅ Pipeline COMPLETADO sin errores.'
+            echo "✔️ Pipeline completado correctamente"
         }
         failure {
-            echo '❌ Pipeline falló. Revisa los logs.'
+            echo "❌ Pipeline falló. Revisa los logs."
         }
     }
 }

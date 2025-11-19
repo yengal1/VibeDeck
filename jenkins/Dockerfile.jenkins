@@ -10,7 +10,7 @@ USER root
 
 # Actualizamos la lista de paquetes, instalamos Docker y limpiamos caché
 RUN apt-get update && \
-    apt-get install -y docker.io && \
+    apt-get install -y docker.io docker-compose && \
     apt-get clean
 
 # Instalamos plugins esenciales de Jenkins usando el CLI
