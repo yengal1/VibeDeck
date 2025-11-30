@@ -24,25 +24,6 @@ services:
     depends_on:
       - api                   # Garantiza que el Backend se inicie ANTES que el Frontend
 
-  # 3. SERVICIO DE INTEGRACIÓN CONTINUA (jenkins)
-  jenkins:
-    build:
-      context: ./jenkins
-      dockerfile: Dockerfile.jenkins
-    container_name: jenkins
-    user: root
-    ports:
-      - "8081:8080"      # Jenkins en localhost:8081
-      - "50000:50000"    # Puerto JNLP
-    volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock  # Permite a Jenkins usar Docker
-    environment:
-      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false
-    depends_on:
-      - api
-      - web
-
 # Definición de Volúmenes para persistencia
 volumes:
   db_data:
