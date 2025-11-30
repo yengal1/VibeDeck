@@ -1,0 +1,27 @@
+services:
+  jenkins:
+    # Construye la imagen del contenedor desde un Dockerfile local
+    build:
+      context: ./jenkins           # Carpeta donde se encuentra el Dockerfile y otros archivos necesarios
+      dockerfile: Dockerfile.jenkins  # Nombre específico del Dockerfile a usar (no es el predeterminado)
+
+    # Nombre del contenedor
+    container_name: jenkins        # Nombre fijo del contenedor en Docker, útil para referenciarlo fácilmente
+
+    # Ejecuta el contenedor como usuario root
+    user: root                     # Necesario para tener permisos completos y poder usar Docker dentro del contenedor
+
+    # Puertos expuestos
+    ports:
+      - "8081:8080"                # Puerto 8080 interno de Jenkins se mapea al 8081 del host (acceso en localhost:8081)
+      - "50000:50000"              # Puerto JNLP para agentes de Jenkins (slave nodes), mapeado igual en host
+
+    # Volúmenes montados
+    volumes:
+      - jenkins_home:/var/jenkins_home    # Persistencia de datos de Jenkins (configuraciones, jobs, plugins)
+      - /var/run/docker.sock:/var/run/docker.sock  # Permite al contenedor de Jenkins controlar Docker del host
+
+    # Variables de entorno
+    environment:
+      - JAVA_OPTS=-Djenkins.install.runSetupWizard=false  
+      # Evita que Jenkins ejecute el asistente inicial de configuración en el primer arranque
