@@ -45,15 +45,15 @@ def seed_initial_moods(db: Session):
             DBMoodMap(
                 mood_name="Calmado", 
                 color_hex="#4682B4", # Azul acero
-                # URL de iframe de Lofi (ejemplo)
-                music_url="https://www.youtube.com/embed/5qap5aO4i9A", 
+                # URL 
+                music_url="https://www.youtube.com/watch?v=hLQl3WQQoQ0&list=PLVGaMAFj8qy0I6lcbGhBAaNQXdcLH9sfQ", 
                 description="Ideal para relajarse y meditar."
             ),
             DBMoodMap(
                 mood_name="Enérgico", 
                 color_hex="#FFD700", # Dorado
-                # URL de un iframe de música optimista (ejemplo)
-                music_url="https://www.youtube.com/embed/Pj1H-fX_kM8", 
+                # URL 
+                music_url="https://www.youtube.com/watch?v=hLQl3WQQoQ0&list=PLVGaMAFj8qy0I6lcbGhBAaNQXdcLH9sfQ", 
                 description="Para empezar el día con fuerza."
             )
         ]
